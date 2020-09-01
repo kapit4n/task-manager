@@ -11,4 +11,4 @@ class Task(models.Model):
     title = models.CharField(max_length=250, default='')
     description = models.CharField(max_length=250, default='')
     state = models.CharField(max_length=250, default='')
-    prority = models.IntegerField(default=0)
+    priority = models.IntegerField(default=0)
