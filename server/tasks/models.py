@@ -16,8 +16,7 @@ class Task(models.Model):
         get_user_model(), on_delete=models.CASCADE, related_name='task_created_by')
     assigned_to = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, related_name='task_assigned_to')
-    departament = models.ForeignKey(
-        Department, on_delete=models.CASCADE, related_name='task_department', default=0)
+    departament = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='task_department', default=0)
     title = models.CharField(max_length=250, default='')
     description = models.CharField(max_length=250, default='')
     state = models.CharField(max_length=250, default='')
