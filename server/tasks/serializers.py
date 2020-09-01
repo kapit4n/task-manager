@@ -9,8 +9,9 @@ UserModel = get_user_model()
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ('id', 'title', 'assigned_to', 'created_by',
-                  'departament', 'description', 'state', 'priority')
+        fields = ('id', 'title', 'assigned_to', 'created_by', 'updated_by',
+                  'department', 'description', 'state', 'priority')
+
 
 """     def update(self, instance, validated_data):
 
@@ -21,6 +22,7 @@ class TaskSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
  """
+
 
 class TaskCommentSerializer(serializers.ModelSerializer):
     class Meta:
