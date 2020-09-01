@@ -12,6 +12,15 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'assigned_to', 'created_by',
                   'departament', 'description', 'state', 'priority')
 
+"""     def update(self, instance, validated_data):
+
+        # taskAssign = TaskAssignation.objects.create(departament_old=instance)
+        print(validated_data.get('department', instance.departament).id)
+        print(instance.departament.id)
+
+        instance.save()
+        return instance
+ """
 
 class TaskCommentSerializer(serializers.ModelSerializer):
     class Meta:
