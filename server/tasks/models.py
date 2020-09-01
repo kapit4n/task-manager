@@ -24,6 +24,7 @@ class Task(models.Model):
     priority = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=datetime.now)
 
+
 class TaskComment(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, default='')
     created_by = models.ForeignKey(
@@ -33,7 +34,12 @@ class TaskComment(models.Model):
 
 
 class TaskAssignation(models.Model):
+    created_at = models.DateTimeField(default=datetime.now)
+    task = models.ForeignKey(
+        Task, on_delete=models.CASCADE, related_name='task_department_assignation')
     department_old = models.ForeignKey(
         Department, on_delete=models.CASCADE, related_name='department_old')
     department_current = models.ForeignKey(
         Department, on_delete=models.CASCADE, related_name='department_current')
+    created_by = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE, related_name='task_department_assignation_by')
