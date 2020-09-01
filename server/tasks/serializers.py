@@ -10,8 +10,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ('id', 'title', 'assigned_to', 'created_by', 'departament', 'description', 'state', 'priority')
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ('id', 'username')
+        fields = ('id', 'username', 'first_name', 'last_name')
