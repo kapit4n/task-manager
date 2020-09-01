@@ -8,6 +8,11 @@ django project to register issues and share with people to fix them
 - python manage.py migrate
 - python manage.py runserver
 
+# apps
+- pip install django-field-history
+- pip install rest-framework
+
+
 # client
 - clone repo
 - cd ui
