@@ -8,8 +8,19 @@ UserModel = get_user_model()
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ('id', 'title', 'assigned_to', 'created_by',
-                  'departament', 'description', 'state', 'priority')
+        fields = ('id', 'title', 'assigned_to', 'created_by', 'updated_by',
+                  'department', 'description', 'state', 'priority')
+
+
+"""     def update(self, instance, validated_data):
+
+        # taskAssign = TaskAssignation.objects.create(departament_old=instance)
+        print(validated_data.get('department', instance.departament).id)
+        print(instance.departament.id)
+
+        instance.save()
+        return instance
+ """
 
 class DepartmentSerializer(serializers.ModelSerializer):
     task_department = TaskSerializer(many=True)

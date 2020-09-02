@@ -1,6 +1,7 @@
 from django.db import models
 from django.db import models
 from django.contrib.auth import get_user_model
+from field_history.tracker import FieldHistoryTracker
 
 from datetime import datetime
 
@@ -10,18 +11,25 @@ from datetime import datetime
 class Department(models.Model):
     name = models.CharField(max_length=250)
 
+    def __str__(self):
+        return self.name
+
 
 class Task(models.Model):
     created_by = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, related_name='task_created_by')
+    updated_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='task_updated_by')
     assigned_to = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, related_name='task_assigned_to')
-    departament = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='task_department', default=0)
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, related_name='task_department', default=0)
     title = models.CharField(max_length=250, default='')
     description = models.CharField(max_length=250, default='')
     state = models.CharField(max_length=250, default='')
     priority = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=datetime.now)
+
+    field_history = FieldHistoryTracker(['department', 'updated_by'])
 
 
 class TaskComment(models.Model):
