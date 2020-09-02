@@ -5,10 +5,25 @@ from .models import Task, TaskComment, TaskAssignation, Department
 
 UserModel = get_user_model()
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):   
+
+    def create(self, validated_data):
+        current_user = self.context['request'].user
+        task = Task.objects.create(
+            title=validated_data['title'],
+            assigned_to=validated_data['assigned_to'],
+            created_by=current_user,
+            updated_by=current_user,
+            department=validated_data['department'],
+            description=validated_data['description'],
+            state=validated_data['state'],
+            priority=validated_data['priority'],
+        )
+        return task
+    
     class Meta:
         model = Task
-        fields = ('id', 'title', 'assigned_to', 'created_by', 'updated_by',
+        fields = ('id', 'title', 'assigned_to',
                   'department', 'description', 'state', 'priority')
 
 
@@ -23,7 +38,6 @@ class TaskSerializer(serializers.ModelSerializer):
  """
 
 class DepartmentSerializer(serializers.ModelSerializer):
-    task_department = TaskSerializer(many=True)
     class Meta:
         model = Department
         fields = ('id', 'name')
