@@ -1,1 +1,5 @@
-<p>task-list works!</p>
+<mat-selection-list #shoes [multiple]="false">
+  <mat-list-option *ngFor="let task of tasks" [value]="task">
+    {{task}}
+  </mat-list-option>
+</mat-selection-list>
