@@ -20,6 +20,26 @@ class TaskSerializer(serializers.ModelSerializer):
             priority=validated_data['priority'],
         )
         return task
+
+    def create(self, validated_data):
+        current_user = self.context['request'].user
+        task = Task.objects.create(
+            title=validated_data['title'],
+            assigned_to=validated_data['assigned_to'],
+            created_by=current_user,
+            updated_by=current_user,
+            department=validated_data['department'],
+            description=validated_data['description'],
+            state=validated_data['state'],
+            priority=validated_data['priority'],
+        )
+        return task
+    
+    def update(self, instance, validated_data):
+        current_user = self.context['request'].user
+        instance.updated_by = current_user
+        instance.save()
+        return instance
     
     class Meta:
         model = Task
