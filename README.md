@@ -17,4 +17,4 @@ django project to register issues and share with people to fix them
 - clone repo
 - cd ui
 - npm i 
-- ng srve
+- ng serve
