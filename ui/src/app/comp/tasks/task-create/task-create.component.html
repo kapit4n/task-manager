@@ -1,19 +1,22 @@
-<form [formGroup]="createTask" style="display: flex; flex-direction: column; width: 30rem;">
-  <mat-form-field appearance="fill">
-    <mat-label>Title</mat-label>
-    <input matInput placeholder="" formControlName="title">
-  </mat-form-field>
+<h1 style="display: flex; align-content: center; justify-content: center;">Create Task</h1>
+<div style="display: flex; align-content: center; justify-content: center;">
+  <form [formGroup]="createTask" style="display: flex; flex-direction: column; width: 30rem; ">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="" formControlName="title">
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Department</mat-label>
-    <input matInput placeholder="" formControlName="department">
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Department</mat-label>
+      <input matInput placeholder="" formControlName="department">
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Description</mat-label>
-    <input matInput placeholder="" formControlName="description">
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="" formControlName="description">
+    </mat-form-field>
 
-  <input #imgInput hidden="true" type="file" onClick="this.value=nul" (change)="imgInputChange($event)" accept=".jpg">
-  <button mat-flat-button color="primary" (click)="imgInput.click()">Choose Image</button>
-</form>
+    <input #imgInput hidden="true" type="file" onClick="this.value=nul" (change)="imgInputChange($event)" accept=".jpg">
+    <button mat-flat-button color="primary" (click)="imgInput.click()">Choose Image</button>
+  </form>
+</div>
