@@ -9,7 +9,7 @@ import { TaskViewComponent } from './comp/tasks/task-view/task-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list'
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +23,7 @@ import { MatListModule } from '@angular/material/list'
     BrowserAnimationsModule,
     MatCardModule,
     MatListModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

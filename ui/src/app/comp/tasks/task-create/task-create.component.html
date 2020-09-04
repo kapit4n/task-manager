@@ -1,1 +1,19 @@
-<p>task-create works!</p>
+<div>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Department</mat-label>
+    <input matInput placeholder="">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="">
+  </mat-form-field>
+
+  <input #imgInput hidden="true" type="file" onClick="this.value=nul" (change)="imgInputChange($event)" accept=".jpg" >
+  <button mat-flat-button color="primary" (click)="imgInput.click()">Choose Image</button>
+</div>

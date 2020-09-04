@@ -12,4 +12,8 @@ export class TaskCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  imgInputChange(event) {
+
+  }
+
 }
