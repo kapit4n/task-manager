@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-task-create',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskCreateComponent implements OnInit {
 
-  constructor() { }
+  createTask: FormGroup;
+  constructor(private formBuilder: FormBuilder) {
+
+   }
 
   ngOnInit(): void {
+    this.createTask=this.formBuilder.group({
+      title: [''],
+      department: [''],
+      description: [''],
+    })
   }
 
   imgInputChange(event) {

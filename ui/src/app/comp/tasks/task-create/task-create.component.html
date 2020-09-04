@@ -1,19 +1,19 @@
-<div>
-  <mat-form-field>
+<form [formGroup]="createTask" style="display: flex; flex-direction: column; width: 30rem;">
+  <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
-    <input matInput placeholder="">
+    <input matInput placeholder="" formControlName="title">
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Department</mat-label>
-    <input matInput placeholder="">
+    <input matInput placeholder="" formControlName="department">
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
-    <input matInput placeholder="">
+    <input matInput placeholder="" formControlName="description">
   </mat-form-field>
 
-  <input #imgInput hidden="true" type="file" onClick="this.value=nul" (change)="imgInputChange($event)" accept=".jpg" >
+  <input #imgInput hidden="true" type="file" onClick="this.value=nul" (change)="imgInputChange($event)" accept=".jpg">
   <button mat-flat-button color="primary" (click)="imgInput.click()">Choose Image</button>
-</div>
+</form>
