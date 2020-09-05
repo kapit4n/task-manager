@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { DepartmentsService, Department } from 'src/app/svc/departments.service';
 
 @Component({
   selector: 'app-task-create',
@@ -10,12 +11,12 @@ export class TaskCreateComponent implements OnInit {
 
   public imagePath;
   createTask: FormGroup;
-  departments = ["department1", 'department2'];
+  departments: Department[];
 
 
   imgURL: any;
-  constructor(private formBuilder: FormBuilder) {
-
+  constructor(private formBuilder: FormBuilder, private departmentsSvc: DepartmentsService) {
+    this.departments = [];
   }
 
   ngOnInit(): void {
@@ -24,6 +25,11 @@ export class TaskCreateComponent implements OnInit {
       department: [''],
       description: [''],
       priority: ['low'],
+    });
+
+    this.departmentsSvc.list().subscribe(data => {
+      console.log(data);
+      this.departments = data;
     })
   }
 
