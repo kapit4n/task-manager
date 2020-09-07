@@ -1,7 +1,6 @@
 <h1 style="display: flex; align-content: center; justify-content: center;">Create Task</h1>
 <div style="display: flex; align-content: center; justify-content: center;">
-  <form [formGroup]="createTask" style="display: flex; flex-direction: column; width: 30rem; " 
-  (ngSubmit)="save()">
+  <form [formGroup]="createTask" style="display: flex; flex-direction: column; width: 30rem; " (ngSubmit)="save()">
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
       <input matInput placeholder="" formControlName="title">
@@ -9,7 +8,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Department</mat-label>
       <mat-select formControlName="department">
-        <mat-option *ngFor="let item of departments" value="item">{{item.name}}</mat-option>
+        <mat-option *ngFor="let item of departments" [value]="item.id">{{item.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
@@ -19,13 +18,13 @@
     <mat-form-field appearance="fill">
       <mat-label>Priority</mat-label>
       <mat-select formControlName="priority">
-        <mat-option value="low">
+        <mat-option value="1">
           Low
         </mat-option>
-        <mat-option value="medium">
+        <mat-option value="2">
           Medium
         </mat-option>
-        <mat-option value="high">
+        <mat-option value="3">
           High
         </mat-option>
       </mat-select>

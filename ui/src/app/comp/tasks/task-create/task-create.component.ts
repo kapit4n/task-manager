@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DepartmentsService, Department } from 'src/app/svc/departments.service';
+import { TasksService } from 'src/app/svc/tasks.service';
+import { Task } from 'src/app/models/task';
 
 @Component({
   selector: 'app-task-create',
@@ -15,7 +17,9 @@ export class TaskCreateComponent implements OnInit {
 
 
   imgURL: any;
-  constructor(private formBuilder: FormBuilder, private departmentsSvc: DepartmentsService) {
+  constructor(private formBuilder: FormBuilder,
+    private departmentsSvc: DepartmentsService,
+    private taskSvc: TasksService) {
     this.departments = [];
   }
 
@@ -50,7 +54,17 @@ export class TaskCreateComponent implements OnInit {
   }
 
   save() {
-    console.log(this.createTask.get("title").value);
+    const taskInfo: Task = {
+      title: this.createTask.get("title").value,
+      description: this.createTask.get("description").value,
+      department: this.createTask.get("department").value,
+      state: 'new',
+      priority: this.createTask.get("priority")?.value,
+      assigned_to: 1,
+    }
+    this.taskSvc.create(taskInfo).subscribe(d => {
+      console.log(d);
+    });
   }
 
 }
