@@ -1,22 +1,44 @@
 <h1 style="display: flex; align-content: center; justify-content: center;">Create Task</h1>
 <div style="display: flex; align-content: center; justify-content: center;">
-  <form [formGroup]="createTask" style="display: flex; flex-direction: column; width: 30rem; ">
+  <form [formGroup]="createTask" style="display: flex; flex-direction: column; width: 30rem; " (ngSubmit)="save()">
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
       <input matInput placeholder="" formControlName="title">
     </mat-form-field>
-
     <mat-form-field appearance="fill">
       <mat-label>Department</mat-label>
-      <input matInput placeholder="" formControlName="department">
+      <mat-select formControlName="department">
+        <mat-option *ngFor="let item of departments" [value]="item.id">{{item.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
-
     <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
       <input matInput placeholder="" formControlName="description">
     </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority">
+        <mat-option value="1">
+          Low
+        </mat-option>
+        <mat-option value="2">
+          Medium
+        </mat-option>
+        <mat-option value="3">
+          High
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <input #imgInput hidden="true" type="file" onClick="this.value=nul" (change)="imgInputChange($event)" accept=".jpg">
-    <button mat-flat-button color="primary" (click)="imgInput.click()">Choose Image</button>
+    <div style="display: flex; align-content: center; justify-content: center;">
+      <img [src]="imgURL" width="300" />
+    </div>
+    <input #imgInput hidden="true" type="file" onClick="this.value=nul" (change)="imgInputChange(imgInput.files)"
+      accept=".jpg">
+    <button mat-flat-button (click)="imgInput.click()">Choose Image</button>
+    <div>
+      <button mat-flat-button color="primary" type="submit">SAVE</button>
+      <button mat-flat-button color="error">CANCEL</button>
+    </div>
   </form>
 </div>
