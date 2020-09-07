@@ -20,6 +20,6 @@ export class DepartmentsService {
   }
 
   public list() {
-    return this.http.get<Department[]>(`${this.baseUrl}/deparments`);
+    return this.http.get<Department[]>(`${this.baseUrl}/departments`);
   }
 }
