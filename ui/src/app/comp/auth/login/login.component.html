@@ -1,1 +1,15 @@
-<p>login works!</p>
+<h1 style="display: flex; align-content: center; justify-content: center;">Login</h1>
+<div style="display: flex; align-content: center; justify-content: center;">
+  <form style="display: flex; flex-direction: column; width: 30rem;" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>User Name</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password">
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit">Login</button>
+    <button mat-flat-button color="secondary" (click)="onCancel()">Cancel</button>
+  </form>
+</div>
