@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { DepartmentsService, Department } from 'src/app/svc/departments.service';
-import { TasksService } from 'src/app/svc/tasks.service';
-import { Task } from 'src/app/models/task';
+import { Department, Task } from 'src/app/shared/_models';
+import { DepartmentsService } from 'src/app/shared/_services/';
+import { TasksService } from 'src/app/shared/_services/tasks.service';
+import { FormGroup, FormBuilder,Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-create',
@@ -10,7 +10,6 @@ import { Task } from 'src/app/models/task';
   styleUrls: ['./task-create.component.css']
 })
 export class TaskCreateComponent implements OnInit {
-
   public imagePath;
   createTask: FormGroup;
   departments: Department[];
