@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-
-export interface Department {
-  id: number;
-  name: string;
-}
+import { Department} from 'src/app/shared/_models';
 
 @Injectable({
   providedIn: 'root'
