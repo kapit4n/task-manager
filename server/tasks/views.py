@@ -4,6 +4,8 @@ from .serializers import TaskSerializer, UserSerializer, TaskCommentSerializer, 
 from rest_framework.viewsets import ModelViewSet
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404, get_list_or_404
+from rest_framework.generics import RetrieveAPIView
 
 UserModel = get_user_model()
 
@@ -21,9 +23,20 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
 
 
+class UserInfo(RetrieveAPIView):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, email=self.request.user)
+        return obj
+
+
 class TaskCommentViewSet(ModelViewSet):
     queryset = TaskComment.objects.all()
     serializer_class = TaskCommentSerializer
+
 
 class DepartmentViewSet(ModelViewSet):
     queryset = Department.objects.all()
