@@ -29,7 +29,7 @@ class UserInfo(RetrieveAPIView):
 
     def get_object(self):
         queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, email=self.request.user)
+        obj = get_object_or_404(queryset, username=self.request.user)
         return obj
 
 
