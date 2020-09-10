@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/_services/auth.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+interface ITokenRes {
+  access; string;
+}
 
 @Component({
   selector: 'app-login',
@@ -7,14 +14,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {
+  loginForm: FormGroup;
 
+  constructor(private authSvc: AuthService, private formBuilder: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    })
   }
 
   onSubmit() {
+    const credentials = this.loginForm.value;
+    this.authSvc.login(credentials).subscribe((res: ITokenRes) => {
+      localStorage.setItem('token', res.access);
+      this.router.navigate(['home']);
+    })
   }
 
   onCancel() {
