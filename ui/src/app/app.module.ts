@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './shared/_material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,14 +10,9 @@ import { TaskListComponent } from './comp/tasks/task-list/task-list.component';
 import { TaskCreateComponent } from './comp/tasks/task-create/task-create.component';
 import { TaskViewComponent } from './comp/tasks/task-view/task-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list'
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './comp/auth/login/login.component'
+import { TokenInterceptor } from 'src/app/shared/inspectors/token.inspector';
 
 @NgModule({
   declarations: [
@@ -35,9 +31,13 @@ import { LoginComponent } from './comp/auth/login/login.component'
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,    
+    MaterialModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

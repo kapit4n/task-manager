@@ -19,4 +19,8 @@ export class AuthService {
   login(credentials: ICredentials) {
     return this.http.post(`${this.baseURL}api/token/`, credentials);
   }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
 }

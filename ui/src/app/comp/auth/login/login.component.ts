@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/_services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/shared/_services/users.service';
 
 interface ITokenRes {
   access; string;
@@ -16,7 +17,9 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private authSvc: AuthService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private authSvc: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router, private userSvc: UsersService) {
   }
 
   ngOnInit(): void {
@@ -30,7 +33,11 @@ export class LoginComponent implements OnInit {
     const credentials = this.loginForm.value;
     this.authSvc.login(credentials).subscribe((res: ITokenRes) => {
       localStorage.setItem('token', res.access);
-      this.router.navigate(['home']);
+      this.userSvc.me().subscribe(me => {
+        console.log('me info');
+        console.log(me);
+        // this.router.navigate(['home']);
+      })
     })
   }
 
