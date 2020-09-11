@@ -7,15 +7,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TasksService {
-
-  baseURL = "http://localhost:8000/api/tasks/";
   constructor(private http: HttpClient) { }
 
   create(taskInfo: Task) {
-    return this.http.post(this.baseURL, taskInfo)
+    return this.http.post(`/tasks/`, taskInfo)
   }
 
   list() {
-    return this.http.get<Task[]>(`${this.baseURL}`);
+    return this.http.get<Task[]>(`/tasks/`);
   }
 }
