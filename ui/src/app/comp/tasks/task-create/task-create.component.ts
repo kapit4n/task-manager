@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, RouteReuseStrategy } from '@angular/router';
+import { first } from 'rxjs/operators';
 import { Department, Task } from 'src/app/shared/_models';
 import { DepartmentsService } from 'src/app/shared/_services/';
 import { TasksService } from 'src/app/shared/_services/tasks.service';
@@ -12,28 +14,28 @@ import { FormGroup, FormBuilder,Validators, ReactiveFormsModule } from '@angular
 export class TaskCreateComponent implements OnInit {
   public imagePath;
   createTask: FormGroup;
-  departments: Department[];
-
-
+  departments: Department[] = [];  
   imgURL: any;
+
   constructor(private formBuilder: FormBuilder,
-    private departmentsSvc: DepartmentsService,
-    private taskSvc: TasksService) {
-    this.departments = [];
+    private departmentService: DepartmentsService,
+    private taskService: TasksService) {
   }
 
   ngOnInit(): void {
+    this.loadDepartment();
     this.createTask = this.formBuilder.group({
       title: [''],
       department: [''],
       description: [''],
       priority: ['low'],
     });
+  }
 
-    this.departmentsSvc.list().subscribe(data => {
-      console.log(data);
-      this.departments = data;
-    })
+  loadDepartment(){
+    this.departmentService.list().pipe(first()).subscribe(departments => {
+        this.departments = departments;
+    });
   }
 
   imgInputChange(files) {
@@ -61,7 +63,7 @@ export class TaskCreateComponent implements OnInit {
       priority: this.createTask.get("priority")?.value,
       assigned_to: 1,
     }
-    this.taskSvc.create(taskInfo).subscribe(d => {
+    this.taskService.create(taskInfo).subscribe(d => {
       console.log(d);
     });
   }

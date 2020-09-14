@@ -11,21 +11,6 @@ class TaskSerializer(serializers.ModelSerializer):
         current_user = self.context['request'].user
         task = Task.objects.create(
             title=validated_data['title'],
-            assigned_to=validated_data['assigned_to'],
-            created_by=current_user,
-            updated_by=current_user,
-            department=validated_data['department'],
-            description=validated_data['description'],
-            state=validated_data['state'],
-            priority=validated_data['priority'],
-        )
-        return task
-
-    def create(self, validated_data):
-        current_user = self.context['request'].user
-        task = Task.objects.create(
-            title=validated_data['title'],
-            assigned_to=validated_data['assigned_to'],
             created_by=current_user,
             updated_by=current_user,
             department=validated_data['department'],
@@ -43,19 +28,7 @@ class TaskSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Task
-        fields = ('id', 'title', 'assigned_to',
-                  'department', 'description', 'state', 'priority')
-
-
-"""     def update(self, instance, validated_data):
-
-        # taskAssign = TaskAssignation.objects.create(departament_old=instance)
-        print(validated_data.get('department', instance.departament).id)
-        print(instance.departament.id)
-
-        instance.save()
-        return instance
- """
+        fields = ('id', 'title','department', 'description', 'state', 'priority')
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
