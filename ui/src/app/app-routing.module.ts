@@ -8,7 +8,7 @@ import { LoginComponent } from './comp/auth/login/login.component';
 
 const routes: Routes = [
   {
-    path: '', component: TaskListComponent
+    path: 'home', component: TaskListComponent
   },
   {
     path: 'login', component: LoginComponent

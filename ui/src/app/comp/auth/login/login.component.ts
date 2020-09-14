@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private authSvc: AuthService,
     private formBuilder: FormBuilder,
     private router: Router, private userSvc: UsersService) {
+
   }
 
   ngOnInit(): void {
@@ -34,10 +35,11 @@ export class LoginComponent implements OnInit {
     const credentials = this.loginForm.value;
     this.authSvc.login(credentials).subscribe((res: ITokenRes) => {
       localStorage.setItem('token', res.access);
-      this.userSvc.me().subscribe((me: User) => {
-        this.userSvc.setMe(me);
+      this.userSvc.me().subscribe((data: User) => {
+        this.authSvc.setUserInfo(data);
         this.router.navigate(['home']);
-      })
+      }, err => console.log(err)
+      );
     })
   }
 
