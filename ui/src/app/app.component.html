@@ -1,4 +1,7 @@
 <div>
+  <div *ngIf="isAuthenticated">
+    <button (click)="logout()">Logout</button>
+  </div>
   <div>Login Info {{userInfo?.username}}</div>
   <router-outlet></router-outlet>
 </div>
