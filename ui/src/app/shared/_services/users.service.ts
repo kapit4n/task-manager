@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 })
 export class UsersService {
 
-  baseUrl = 'http://localhost:8000'
+  baseUrl = ''
   constructor(private http: HttpClient, private router: Router) { }
 
   public me() {
-    return this.http.get(`${this.baseUrl}/api/me`)
+    return this.http.get(`${this.baseUrl}/me`)
   }
 
   public setMe(userInfo: User) {

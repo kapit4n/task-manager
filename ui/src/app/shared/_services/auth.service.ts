@@ -15,7 +15,7 @@ interface ICredentials {
 export class AuthService {
 
   isAuthenticated = new BehaviorSubject<boolean>(false);
-  baseURL = 'http://localhost:8000/'
+  baseURL = ''
   constructor(private http: HttpClient, private router: Router) {
     const authenticated = this.isLoggedIn;
     this.isAuthenticated.next(authenticated);
@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   login(credentials: ICredentials) {
-    return this.http.post(`${this.baseURL}api/token/`, credentials);
+    return this.http.post(`${this.baseURL}/token/`, credentials);
   }
 
   setUserInfo(user: User) {

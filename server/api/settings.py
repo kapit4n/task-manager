@@ -26,11 +26,11 @@ SECRET_KEY = 'et3@l(e75#-ky+kv!6^siem#8bd(g9&)lm)vz#jc-0u*_m_oy@'
 DEBUG = True
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
     'tasks.apps.TasksConfig',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'field_history',
-    'corsheaders',
 ]
 
 
@@ -55,6 +54,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 ROOT_URLCONF = 'api.urls'
 
 TEMPLATES = [
@@ -128,4 +134,9 @@ STATIC_URL = '/static/'
 ALLOWED_HOSTS = ["*"]
 
 # cors
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:4200',
+]
