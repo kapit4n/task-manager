@@ -1,7 +1,7 @@
-<div>
-  <div *ngIf="isAuthenticated">
-    <button (click)="logout()">Logout</button>
+<div style="padding: 2rem;">
+  <div *ngIf="isAuthenticated" style="display: flex; flex-direction: row-reverse;">
+    <button mat-flat-button color="primary" (click)="logout()">Logout</button>
+    <div style="padding-top: 0.5rem; padding-right: 1rem;">{{userInfo?.username}}</div>
   </div>
-  <div>Login Info {{userInfo?.username}}</div>
   <router-outlet></router-outlet>
 </div>
