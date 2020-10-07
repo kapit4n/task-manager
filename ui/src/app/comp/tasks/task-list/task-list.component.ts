@@ -23,7 +23,7 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  onDisplayCreate = () => {
-    this.displayCreate = true
+  onDisplayCreate = (displayIt: boolean) => {
+    this.displayCreate = displayIt
   }
 }

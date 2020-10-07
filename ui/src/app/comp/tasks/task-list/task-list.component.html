@@ -1,4 +1,4 @@
-<button mat-flat-button color="primary" (click)="onDisplayCreate()">Create</button>
+<button mat-flat-button color="primary" (click)="onDisplayCreate(true)">Create</button>
 <div *ngIf="displayCreate">
   <app-task-create></app-task-create>
 </div>
@@ -32,7 +32,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button>OPEN</button>
+      <button mat-button><a routerLink="/tasks/1" routerLinkActive="active">OPEN</a></button>
     </td>
   </ng-container>
 
