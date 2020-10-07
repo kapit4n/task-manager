@@ -9,11 +9,13 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         current_user = self.context['request'].user
+
         task = Task.objects.create(
             title=validated_data['title'],
             created_by=current_user,
             updated_by=current_user,
             department=validated_data['department'],
+            assigned_to=validated_data['assigned_to'],
             description=validated_data['description'],
             state=validated_data['state'],
             priority=validated_data['priority'],
@@ -28,7 +30,7 @@ class TaskSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Task
-        fields = ('id', 'title','department', 'description', 'state', 'priority')
+        fields = ('id', 'title','department', 'description', 'state', 'priority', 'assigned_to')
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
