@@ -12,6 +12,12 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
+      <mat-label>Assigned</mat-label>
+      <mat-select formControlName="assigned_to">
+        <mat-option *ngFor="let item of users" [value]="item.id">{{item.username}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Descripcion</mat-label>
       <input matInput placeholder="" formControlName="description">
     </mat-form-field>

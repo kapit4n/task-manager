@@ -15,6 +15,10 @@ export class UsersService {
     return this.http.get(`${this.baseUrl}/me`)
   }
 
+  public list() {
+    return this.http.get<User[]>(`${this.baseUrl}/users/`)
+  }
+
   public setMe(userInfo: User) {
     localStorage.setItem('me', JSON.stringify(userInfo))
   }

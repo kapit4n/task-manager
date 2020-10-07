@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, RouteReuseStrategy } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { Department, Task } from 'src/app/shared/_models';
+import { Department, Task, User } from 'src/app/shared/_models';
 import { DepartmentsService } from 'src/app/shared/_services/';
 import { TasksService } from 'src/app/shared/_services/tasks.service';
-import { FormGroup, FormBuilder,Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { UsersService } from 'src/app/shared/_services/users.service';
 
 @Component({
   selector: 'app-task-create',
@@ -14,27 +15,38 @@ import { FormGroup, FormBuilder,Validators, ReactiveFormsModule } from '@angular
 export class TaskCreateComponent implements OnInit {
   public imagePath;
   createTask: FormGroup;
-  departments: Department[] = [];  
+  departments: Department[] = [];
+  users: User[] = [];
   imgURL: any;
 
   constructor(private formBuilder: FormBuilder,
     private departmentService: DepartmentsService,
-    private taskService: TasksService) {
+    private taskService: TasksService,
+    private usersService: UsersService) {
+
   }
 
   ngOnInit(): void {
     this.loadDepartment();
+    this.loadUsers();
     this.createTask = this.formBuilder.group({
       title: [''],
       department: [''],
+      assigned_to: [''],
       description: [''],
       priority: ['low'],
     });
   }
 
-  loadDepartment(){
+  loadDepartment() {
     this.departmentService.list().pipe(first()).subscribe(departments => {
-        this.departments = departments;
+      this.departments = departments;
+    });
+  }
+
+  loadUsers() {
+    this.usersService.list().pipe(first()).subscribe(users => {
+      this.users = users;
     });
   }
 
@@ -59,9 +71,9 @@ export class TaskCreateComponent implements OnInit {
       title: this.createTask.get("title").value,
       description: this.createTask.get("description").value,
       department: this.createTask.get("department").value,
+      assigned_to: this.createTask.get("assigned_to").value,
       state: 'new',
       priority: this.createTask.get("priority")?.value,
-      assigned_to: 1,
     }
     this.taskService.create(taskInfo).subscribe(d => {
       console.log(d);
