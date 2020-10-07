@@ -11,6 +11,7 @@ export class TaskListComponent implements OnInit {
 
   tasks: Task[];
   displayCreate = false;
+  displayedColumns = ['title', 'department', 'priority', 'state', 'assigned_to', 'actions'];
 
   constructor(private tasksSvc: TasksService) {
 
